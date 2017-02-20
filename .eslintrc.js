@@ -6,17 +6,19 @@ module.exports = {
   },
   extends: 'airbnb-base',
   plugins: [
-    'html'
+    'html',
+    'json'
   ],
   'rules': {
     'no-param-reassign': ["error", { "props": false }],
     'no-mixed-operators': 0,
     'import/extensions': 0,
-    "import/no-extraneous-dependencies": [
+    'import/no-extraneous-dependencies': [
       "error",
       {
         "devDependencies": true,
       }
     ],
+    'import/no-unresolved': 0,
   }
-}
+};

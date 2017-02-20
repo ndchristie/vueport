@@ -3,7 +3,7 @@ import App from './components/App';
 
 const app = new Vue({
   el: 'body',
-  render: h => h(App),
+  render: createElement => createElement(App),
 });
 
 export default app;

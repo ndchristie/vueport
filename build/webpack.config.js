@@ -1,9 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
-module.exports = {
-  entry: './src/main.js',
+const config = {
+  entry: {
+    app: './src/main.js',
+  },
   output: {
-    path: './dist',
+    path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
   },
   module: {
@@ -20,6 +24,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
@@ -30,3 +35,5 @@ module.exports = {
     extensions: ['.js', '.vue'],
   },
 };
+
+module.exports = config;
