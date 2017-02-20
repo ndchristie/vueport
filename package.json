@@ -1,0 +1,11 @@
+{
+  "name": "vueport",
+  "version": "1.0.0",
+  "description": "A multidisciplinary portfolio template powered by Vuejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "N.D.Christie",
+  "license": "MIT"
+}
