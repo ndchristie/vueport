@@ -2,23 +2,29 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
   },
   extends: 'airbnb-base',
   plugins: [
     'html',
-    'json'
+    'json',
   ],
-  'rules': {
-    'no-param-reassign': ["error", { "props": false }],
+  rules: {
+    'no-param-reassign': ['error', { props: false }],
     'no-mixed-operators': 0,
     'import/extensions': 0,
     'import/no-extraneous-dependencies': [
-      "error",
+      'error',
       {
-        "devDependencies": true,
-      }
+        devDependencies: true,
+      },
     ],
-    'import/no-unresolved': 0,
-  }
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: './build/webpack.config.js',
+      },
+    },
+  },
 };
