@@ -5,10 +5,10 @@ const webpack = require('webpack');
 const projectRoot = path.resolve(__dirname, '../');
 const config = {
   entry: {
-    app: './src/main.js',
+    app: path.resolve(projectRoot, './src/main.js'),
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(projectRoot, './dist'),
     filename: '[name].js',
   },
   devtool: '#inline-source-map',

@@ -4,7 +4,7 @@
   "description": "A multidisciplinary portfolio template powered by Vuejs",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist/* && webpack",
+    "build": "rm -rf dist/* && webpack --config build/webpack.config.js",
     "dev": "node build/dev_server.js",
     "test": "karma start test/unit/karma.config.js --single-run"
   },
