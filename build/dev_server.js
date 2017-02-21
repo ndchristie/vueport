@@ -9,13 +9,10 @@ Object.keys(webpackConfig.entry).forEach((name) => {
 });
 
 const compiler = webpack(webpackConfig);
-const port = 3000;
 
 const devMiddleware = webpackDevMiddleware(compiler, {
-  noInfo: true,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000,
+  stats: {
+    colors: true,
   },
 });
 
@@ -27,6 +24,8 @@ compiler.plugin('compilation', (compilation) => {
     cb();
   });
 });
+
+const port = process.env.port || 8080;
 
 const app = express();
 app.use(devMiddleware);
