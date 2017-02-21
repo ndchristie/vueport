@@ -5,7 +5,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 Object.keys(webpackConfig.entry).forEach((name) => {
-  webpackConfig.entry[name] = ['./build/dev-client'].concat(webpackConfig.entry[name]);
+  webpackConfig.entry[name] = ['./build/dev_client'].concat(webpackConfig.entry[name]);
 });
 
 const compiler = webpack(webpackConfig);
