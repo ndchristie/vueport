@@ -1,5 +1,5 @@
 import App from 'src/components/App';
-import Vue from 'Vue';
+import Vue from 'vue';
 
 describe('App', () => {
   let vm;
