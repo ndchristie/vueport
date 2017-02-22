@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
@@ -25,7 +26,7 @@ compiler.plugin('compilation', (compilation) => {
   });
 });
 
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(devMiddleware);
