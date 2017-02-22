@@ -3,6 +3,7 @@ import Vue from 'vue';
 
 describe('App', () => {
   let vm;
+
   const defaultData = App.data();
 
   beforeEach(() => {

@@ -1,19 +1,35 @@
 const path = require('path');
-const webpackConfig = require('../../build/webpack.config');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('../../build/webpack.config');
 
 const projectRoot = path.resolve(__dirname, '../../');
 
-webpackConfig.module.rules.unshift({
-  test: /\.(js|vue)$/,
-  loader: 'istanbul-instrumenter-loader',
-  include: path.resolve(projectRoot, 'src'),
+const webpackConfig = merge.smart(baseWebpackConfig, {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'isparta-loader',
+        include: path.resolve(projectRoot, 'src'),
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            js: 'isparta-loader',
+          },
+        },
+      },
+    ],
+  },
 });
 
 module.exports = (config) => {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai'],
-    reporters: ['spec', 'coverage-istanbul'],
+    reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap'],
@@ -22,9 +38,12 @@ module.exports = (config) => {
     webpackMiddleware: {
       noInfo: true,
     },
-    coverageIstanbulReporter: {
-      dir: './test/unit/coverage',
-      reports: ['html', 'lcov', 'text-summary'],
+    coverageReporter: {
+      dir: './coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' },
+      ],
     },
   });
 };
