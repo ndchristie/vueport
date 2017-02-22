@@ -28,7 +28,7 @@ const webpackConfig = merge.smart(baseWebpackConfig, {
 module.exports = (config) => {
   config.set({
     browsers: ['PhantomJS'],
-    frameworks: ['mocha', 'sinon-chai'],
+    frameworks: ['mocha', 'chai-dom', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {

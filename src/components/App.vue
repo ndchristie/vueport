@@ -1,15 +1,19 @@
 <template>
-  <div id="app">
-    <h3 v-bind:text-content.prop="message"></h3>
+  <div class="app">
+    <application-header></application-header>
+    <application-footer></application-footer>
   </div>
 </template>
 
 <script>
+  import ApplicationFooter from 'components/layout/ApplicationFooter';
+  import ApplicationHeader from 'components/layout/ApplicationHeader';
+
   export default {
-    data() {
-      return {
-        message: 'Hello Vue!',
-      };
+    name: 'app',
+    components: {
+      ApplicationFooter,
+      ApplicationHeader,
     },
   };
 </script>

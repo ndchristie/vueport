@@ -1,20 +1,27 @@
-import App from 'src/components/App';
+import App from 'components/App';
 import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+const mockedStore = new Vuex.Store({
+  socialLinks: {
+    email: 'mailto:me@email.com',
+    github: 'https://github.com/ndchristie',
+  },
+});
 
 describe('App', () => {
-  let vm;
-
-  const defaultData = App.data();
-
-  beforeEach(() => {
-    vm = new Vue({
+  it('Has a header and a footer as child components', () => {
+    const vm = new Vue({
       el: document.createElement('body'),
-      render: h => h(App),
+      render: createElement => createElement(App),
+      store: mockedStore,
     });
-  });
-
-  it('Has and displays a message', () => {
-    expect(defaultData).to.have.property('message');
-    expect(vm.$el.textContent).to.equal(defaultData.message);
+    const app = vm.$children[0];
+    expect(app.$options.components).to.have.property('ApplicationHeader');
+    expect(app.$el).to.contain('.application-header');
+    expect(app.$options.components).to.have.property('ApplicationFooter');
+    expect(app.$el).to.contain('.application-footer');
   });
 });

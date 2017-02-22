@@ -5,7 +5,10 @@ const webpack = require('webpack');
 const projectRoot = path.resolve(__dirname, '../');
 const config = {
   entry: {
-    app: path.resolve(projectRoot, './src/main.js'),
+    app: [
+      'babel-polyfill',
+      path.resolve(projectRoot, './src/main.js'),
+    ],
   },
   output: {
     path: path.resolve(projectRoot, './dist'),
@@ -49,6 +52,7 @@ const config = {
     alias: {
       vue$: 'vue/dist/vue.common.js',
       src: path.resolve(__dirname, '../src'),
+      components: path.resolve(__dirname, '../src/components'),
     },
   },
 };
