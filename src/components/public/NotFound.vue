@@ -1,11 +1,11 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div class="not-found">
+    <h1>Not Found!</h1>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'app',
+    name: 'not-found',
   };
 </script>

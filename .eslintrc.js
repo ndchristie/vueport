@@ -12,13 +12,10 @@ module.exports = {
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-mixed-operators': 0,
+    'no-bitwise': 0,
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
     'import/extensions': 0,
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-      },
-    ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   settings: {
     'import/resolver': {
