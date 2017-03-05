@@ -2,7 +2,7 @@
   <div class="application-header">
     <ul class="application-header-links">
       <li class="application-header-links__link" v-for="(link, name) in headerLinks">
-        <a :href="link" :text-content.prop="name">
+        <a :href="link" :text-content.prop="name"></a>
       </li>
     </ul>
   </div>

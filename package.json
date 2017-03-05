@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf dist/* && webpack --config build/webpack.config.js",
     "dev": "node build/dev_server.js",
+    "local": "npm run build && node build/prod_server.js",
     "test": "karma start test/unit/karma.config.js --single-run",
     "lint": "eslint src/*"
   },
