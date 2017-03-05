@@ -12,6 +12,7 @@ const config = {
   },
   output: {
     path: path.resolve(projectRoot, './dist'),
+    publicPath: '/',
     filename: '[name].js',
   },
   devtool: '#inline-source-map',
