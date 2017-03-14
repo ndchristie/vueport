@@ -17,15 +17,14 @@ const webpackConfig = merge.smart(baseWebpackConfig, {
         loader: 'vue-loader',
         options: {
           loaders: {
-            js: 'isparta-loader',
+            js: 'babel-loader!isparta-loader',
+            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader',
           },
         },
       },
     ],
   },
 });
-
-delete webpackConfig.entry;
 
 module.exports = (config) => {
   config.set({

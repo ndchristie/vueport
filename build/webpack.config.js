@@ -29,9 +29,17 @@ const config = {
         options: {
           loaders: {
             js: 'babel-loader',
-            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader',
+            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader?sourceMap',
           },
         },
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?sourceMap',
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader?sourceMap',
       },
     ],
   },
@@ -44,14 +52,14 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.scss', '.vue'],
     alias: {
-      src: path.resolve(__dirname, '../src'),
-      assets: path.resolve(__dirname, '../src/assets'),
-      components: path.resolve(__dirname, '../src/components'),
-      models: path.resolve(__dirname, '../src/models'),
-      store: path.resolve(__dirname, '../src/store'),
-      router: path.resolve(__dirname, '../src/router'),
+      src: path.resolve(projectRoot, './src'),
+      assets: path.resolve(projectRoot, './src/assets'),
+      components: path.resolve(projectRoot, './src/components'),
+      models: path.resolve(projectRoot, './src/models'),
+      store: path.resolve(projectRoot, './src/store'),
+      router: path.resolve(projectRoot, './src/router'),
     },
   },
 };
