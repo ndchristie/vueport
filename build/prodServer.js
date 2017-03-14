@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 const bodyParser = require('body-parser');
 const history = require('connect-history-api-fallback');
 const db = require('../mongoose');
@@ -9,11 +10,6 @@ const apiRouter = require('../router');
 const projectRoot = path.resolve(__dirname, '../');
 const port = process.env.PORT || 8080;
 const staticPath = process.env.STATIC_PATH || path.resolve(projectRoot, './dist');
-
-// const app = express();
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
 
 db.once('open', () => {
   const app = express();
@@ -25,9 +21,8 @@ db.once('open', () => {
     req.db = db;
     next();
   });
-  app.use(express.static(staticPath));
+  app.use(expressStaticGzip(staticPath));
 
-  /* eslint-disable no-console */
   module.exports = app.listen(port, (err) => {
     if (err) {
       console.log(err);
@@ -35,5 +30,4 @@ db.once('open', () => {
     }
     console.log(`Dev server started at http://localhost:${port}\n`);
   });
-  /* eslint-enable no-console */
 });

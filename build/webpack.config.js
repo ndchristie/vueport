@@ -1,6 +1,6 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
+const plugins = require('./plugins');
+const styleLoaders = require('./styleLoaders');
 
 const projectRoot = path.resolve(__dirname, '../');
 const config = {
@@ -15,7 +15,7 @@ const config = {
     publicPath: '/',
     filename: '[name].js',
   },
-  devtool: '#inline-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? undefined : '#eval',
   module: {
     rules: [
       {
@@ -29,28 +29,21 @@ const config = {
         options: {
           loaders: {
             js: 'babel-loader',
-            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader?sourceMap',
+            scss: styleLoaders.vueStyleLoaders,
           },
         },
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?sourceMap',
+        loader: styleLoaders.cssStyleLoaders,
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader?sourceMap',
+        loader: styleLoaders.scssStyleLoaders,
       },
     ],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true,
-    }),
-  ],
+  plugins,
   resolve: {
     extensions: ['.js', '.scss', '.vue'],
     alias: {

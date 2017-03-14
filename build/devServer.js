@@ -45,7 +45,6 @@ db.once('open', () => {
     next();
   });
 
-  /* eslint-disable no-console */
   module.exports = app.listen(port, (err) => {
     if (err) {
       console.log(err);
@@ -53,5 +52,4 @@ db.once('open', () => {
     }
     console.log(`Dev server started at http://localhost:${port}\n`);
   });
-  /* eslint-enable no-console */
 });
