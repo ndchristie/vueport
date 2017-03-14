@@ -11,3 +11,6 @@
     name: 'admin-layout',
   };
 </script>
+
+<style lang='scss' src="assets/stylesheets/admin.scss">
+</style>

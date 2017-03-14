@@ -18,3 +18,6 @@
     },
   };
 </script>
+
+<!-- style lang='scss' src="assets/stylesheets/portfolio.scss">
+</style -->

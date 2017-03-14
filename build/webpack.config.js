@@ -29,13 +29,8 @@ const config = {
         options: {
           loaders: {
             js: 'babel-loader',
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            scss: 'vue-style-loader!css-loader!sass-loader',
-            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader',
           },
-          // other vue-loader options go here
         },
       },
     ],
@@ -47,15 +42,12 @@ const config = {
       template: 'index.html',
       inject: true,
     }),
-    // new webpack.ProvidePlugin({
-    //   Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
-    //   fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
-    // }),
   ],
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
       src: path.resolve(__dirname, '../src'),
+      assets: path.resolve(__dirname, '../src/assets'),
       components: path.resolve(__dirname, '../src/components'),
       models: path.resolve(__dirname, '../src/models'),
       store: path.resolve(__dirname, '../src/store'),
