@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import NotFound from 'components/public/NotFound';
-import applicationRoutes from './applicationRoutes';
+import portfolioRoutes from './portfolioRoutes';
+import adminRoutes from './adminRoutes';
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,8 @@ const notFoundRoute = {
 export default new VueRouter({
   mode: 'history',
   routes: [
-    ...applicationRoutes,
+    ...adminRoutes,
+    ...portfolioRoutes,
     notFoundRoute,
   ],
 });

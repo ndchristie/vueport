@@ -47,12 +47,19 @@ const config = {
       template: 'index.html',
       inject: true,
     }),
+    // new webpack.ProvidePlugin({
+    //   Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+    //   fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+    // }),
   ],
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
       src: path.resolve(__dirname, '../src'),
       components: path.resolve(__dirname, '../src/components'),
+      models: path.resolve(__dirname, '../src/models'),
+      store: path.resolve(__dirname, '../src/store'),
+      router: path.resolve(__dirname, '../src/router'),
     },
   },
 };

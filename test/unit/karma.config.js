@@ -25,10 +25,12 @@ const webpackConfig = merge.smart(baseWebpackConfig, {
   },
 });
 
+delete webpackConfig.entry;
+
 module.exports = (config) => {
   config.set({
     browsers: ['PhantomJS'],
-    frameworks: ['mocha', 'chai-dom', 'sinon-chai'],
+    frameworks: ['mocha', 'chai-dom', 'sinon-stub-promise', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
