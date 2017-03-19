@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import ViewSocialLink from 'components/admin/socialLinks/ViewSocialLink';
-import socialLinks from 'store/modules/socialLinks';
 
 Vue.use(Vuex);
 
@@ -19,15 +18,21 @@ describe('vue components', () => {
     beforeEach(() => {
       store = new Vuex.Store({
         modules: {
-          socialLinks: _.cloneDeep(socialLinks),
+          socialLinks: {
+            getters: {
+              activeSocialLink: () => ({ name: 'test', href: 'http://test.com' }),
+            },
+          },
         },
       });
     });
 
-    it('contains a form which it submits to updateSocialLink', () => {
-      const stub = sinon.stub(store, 'dispatch');
-      stub.returnsPromise();
-      stub.resolves(true);
+    afterEach(() => {
+      router.push('/');
+    });
+
+    it('contains the details for the current social link', (done) => {
+      const stub = sinon.stub(store, 'dispatch', () => Promise.resolve());
       const vm = new Vue({
         el: document.createElement('div'),
         render: h => h('router-view'),
@@ -35,7 +40,11 @@ describe('vue components', () => {
         router,
       });
       router.push('test');
-      expect(stub).to.have.been.calledWith('fetchSocialLink');
+      Vue.nextTick(() => {
+        expect(stub).to.have.been.calledWith('fetchSocialLink');
+        stub.restore();
+        done();
+      });
     });
   });
 });

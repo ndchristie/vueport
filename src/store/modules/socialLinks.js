@@ -5,7 +5,7 @@ const UPDATE_CURRENT_SOCIAL_LINK = 'UPDATE_CURRENT_SOCIAL_LINK';
 
 export default {
   state: {
-    active: null,
+    active: { name: '...', href: '...' },
     list: [],
   },
   mutations: {

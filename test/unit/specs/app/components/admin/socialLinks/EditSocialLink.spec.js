@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import EditSocialLink from 'components/admin/socialLinks/EditSocialLink';
-import socialLinks from 'store/modules/socialLinks';
 
 Vue.use(Vuex);
 
@@ -14,7 +13,11 @@ describe('vue components', () => {
     beforeEach(() => {
       store = new Vuex.Store({
         modules: {
-          socialLinks: _.cloneDeep(socialLinks),
+          socialLinks: {
+            getters: {
+              activeSocialLink: () => ({ name: 'test', href: 'http://test.com' }),
+            },
+          },
         },
       });
       router = new VueRouter({
@@ -25,10 +28,12 @@ describe('vue components', () => {
       });
     });
 
+    afterEach(() => {
+      router.push('/');
+    });
+
     it('contains a form which it submits to updateSocialLink', (done) => {
-      const stub = sinon.stub(store, 'dispatch');
-      stub.returnsPromise();
-      stub.resolves(true);
+      const stub = sinon.stub(store, 'dispatch', () => Promise.resolve());
       const vm = new Vue({
         el: document.createElement('div'),
         render: h => h('router-view'),
@@ -41,6 +46,7 @@ describe('vue components', () => {
         vm.$children[0].submitRequest(new Event());
         sinon.stub(vm.$children[0].$refs.form, 'checkValidity', () => false);
         vm.$children[0].submitRequest(new Event());
+        expect(stub).to.have.been.called.twice;
         expect(stub).to.have.been.calledWith('updateSocialLink');
         stub.restore();
         done();

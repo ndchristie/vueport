@@ -1,12 +1,12 @@
 import AdminLayout from 'components/layout/AdminLayout';
-import SocialLinksList from 'components/admin/socialLinks/SocialLinksList';
+import ListSocialLinks from 'components/admin/socialLinks/ListSocialLinks';
 import EditSocialLink from 'components/admin/socialLinks/EditSocialLink';
 import NewSocialLink from 'components/admin/socialLinks/NewSocialLink';
 import ViewSocialLink from 'components/admin/socialLinks/ViewSocialLink';
 
 const socialLinksIndex = {
   path: 'social-links',
-  component: SocialLinksList,
+  component: ListSocialLinks,
 };
 
 const newSocialLink = {

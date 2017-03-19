@@ -1,0 +1,11 @@
+@import '../vars/colors';
+@import '../vars/metrics';
+
+.vp {
+  &-body {
+    background: $themeGround;
+  }
+  &-container {
+    margin: 0 $gutterWidth;
+  }
+}

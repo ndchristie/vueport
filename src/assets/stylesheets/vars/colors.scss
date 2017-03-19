@@ -1,0 +1,48 @@
+/* gray scale */
+
+$themeLightest: #fff;
+$themeGround: #f4f5f6;
+$themeDarkest: #334;
+
+$themeMedium: grayscale(adjust-hue(mix($themeGround, $themeDarkest, 80%), 100deg));
+$themeMediumStain: transparentize($themeDarkest, .766);
+$themeMediumScreen: transparentize($themeLightest, .234);
+
+$themeLighter: $themeGround;
+$themeLighterStain: transparentize($themeDarkest, .95);
+$themeLighterScreen: transparentize($themeLightest, .05);
+
+$themeLight: mix($themeGround, $themeMedium, 60%);
+$themeLightStain: transparentize($themeDarkest, .877);
+$themeLightScreen: transparentize($themeLightest, .123);
+
+$themeDark: mix($themeMedium, $themeDarkest, 70%);
+$themeDarkStain: transparentize($themeDarkest, .54);
+$themeDarkScreen: transparentize($themeLightest, .46);
+
+$themeDarker: mix($themeGround, $themeDarkest, 30%);
+$themeDarkerStain: transparentize($themeDarkest, .285);
+$themeDarkerScreen: transparentize($themeLightest, .715);
+
+/* generic rolls */
+
+$themePrimary: #7af;
+$themePrimaryLight: #bcf;
+$themePrimaryLighter: mix($themeLightest, $themePrimaryLight, 30%);
+$themePrimaryDark: #57a;
+
+$themeAffirm: #5dc;
+$themeAffirmLight: #a0f8d0;
+$themeAffirmLighter: mix($themeLightest, $themeAffirmLight, 30%);
+$themeAffirmDark: #4a9;
+
+$themeAlert: #f8c070;
+$themeAlertLight: #feb;
+$themeAlertLighter: mix($themeLightest, $themeAlertLight, 30%);
+$themeAlertDark: #da7;
+
+
+$themeAlarm: #f66;
+$themeAlarmLight: #faa;
+$themeAlarmLighter: mix($themeLightest, $themeAlarmLight, 30%);
+$themeAlarmDark: #c46;

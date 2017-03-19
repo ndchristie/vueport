@@ -1,0 +1,8 @@
+@import '../vars/metrics';
+
+.vp {
+  &-list {
+    margin: 0 0 $gutterWidth;
+    padding: 0;
+  }
+}

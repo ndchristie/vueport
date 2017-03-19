@@ -1,33 +1,48 @@
 <template>
   <div class="edit-social-link">
-    <form ref="form">
-      <fieldset v-if="activeSocialLink">
-        <div class="form-row">
-          <label for="name">Name
+    <h1>Social Link: {{ previous.name }}</h1>
+    <div class="vp-card">
+      <h2 class="vp-card-heading vp-card-heading--small">Edit Details</h2>
+      <form class="vp-form vp-card-body" ref="form">
+        <div class="vp-form-row">
+          <label class="vp-form-label" for="name">Name
           </label>
           <input
+            class="vp-input vp-input--fw"
             type="text"
             name="name"
             v-model="activeSocialLink.name"
+            v-if="loaded"
             required
           />
         </div>
-        <div class="form-row">
-          <label for="href">HREF
+        <div class="vp-form-row">
+          <label class="vp-form-label" for="href">HREF
           </label>
           <input
+            class="vp-input vp-input--fw"
             type="url"
             name="href"
             v-model="activeSocialLink.href"
+            v-if="loaded"
             required
           />
         </div>
-      </fieldset>
-      <input
-        type="submit"
-        v-on:click="submitRequest"
-      />
-    </form>
+        <div class="vp-form-row">
+          <router-link :to="`/admin/social-links/${previous.name}`">
+            <button class="vp-btn" type="button">
+              Cancel
+            </button>
+          </router-link>
+          <input
+            class="vp-btn vp-btn--primary"
+            type="submit"
+            value="Update"
+            v-on:click="submitRequest"
+          />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -42,7 +57,8 @@
     },
     data() {
       return {
-        previous: null,
+        loaded: false,
+        previous: { name: '...', href: '...' },
       };
     },
     methods: {
@@ -62,6 +78,7 @@
       this.$store.dispatch('fetchSocialLink', { name: this.$route.params.name })
       .then((data) => {
         this.previous = _.cloneDeep(data);
+        this.loaded = true;
       });
     },
   };

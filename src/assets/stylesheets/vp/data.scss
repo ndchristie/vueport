@@ -1,0 +1,17 @@
+@import '../vars/metrics';
+
+.vp {
+  &-data {
+    &-row {
+      margin: $gutterWidth 0;
+      &:first-child { margin-top: 0; }
+      &:last-child { margin-bottom: 0; }
+    }
+    &-label {
+      display: block;
+    }
+    &-value {
+      display: block;
+    }
+  }
+}

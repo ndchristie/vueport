@@ -10,4 +10,4 @@
   };
 </script>
 
-<style lang="scss" src="assets/app.scss"></style>
+<style lang="scss" src="assets/stylesheets/vp.scss"></style>

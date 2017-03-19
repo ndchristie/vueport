@@ -1,0 +1,33 @@
+@import '../vars/colors';
+
+*, *:before, *:after {
+  color: inherit;
+  font-smoothing: antialiased;
+}
+
+html { color: $themeDarker; }
+
+.vp {
+  &-body {
+    font-family: Roboto, 'droid sans', helvetica, arial, sans-serif;
+  }
+  &-link {
+    color: $themePrimary;
+    &:hover { color: $themePrimaryDark; }
+    &--primary { color: $themePrimary; &:hover { color: $themePrimaryDark; }}
+    &--affirm { color: $themeAffirm; &:hover { color: $themeAffirmDark; }}
+    &--alert { color: $themeAlert; &:hover { color: $themeAlertDark; }}
+    &--alarm { color: $themeAlarm; &:hover { color: $themeAlarmDark; }}
+    &--muted {
+      color: $themeMedium;
+      &:hover { color: $themeMedium; }
+    }
+    &--inverse {
+      color: $themePrimaryLighter;
+      &:hover { color: $themeLightest; }
+      &.vp-link--pos { color: $themeAffirmLight; &:hover { color: $themeAffirmLighter; }}
+      &.vp-link--alert { color: $themeAlertLight; &:hover { color: $themeAlertLighter; }}
+      &.vp-link--alarm { color: $themeAlarmLight; &:hover { color: $themeAlarmLighter; }}
+    }
+  }
+}
