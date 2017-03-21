@@ -1,6 +1,6 @@
 <template>
   <div class="edit-social-link">
-    <h1>Social Link: {{ previous.name }}</h1>
+    <h1>Social Link: {{ activeSocialLink.name }}</h1>
     <div class="vp-card">
       <h2 class="vp-card-heading vp-card-heading--small">Edit Details</h2>
       <form class="vp-form vp-card-body" ref="form">
@@ -10,9 +10,8 @@
           <input
             class="vp-input vp-input--fw"
             type="text"
-            name="name"
-            v-model="activeSocialLink.name"
-            v-if="loaded"
+            id="name"
+            v-model="workingCopy.name"
             required
           />
         </div>
@@ -22,14 +21,13 @@
           <input
             class="vp-input vp-input--fw"
             type="url"
-            name="href"
-            v-model="activeSocialLink.href"
-            v-if="loaded"
+            id="href"
+            v-model="workingCopy.href"
             required
           />
         </div>
         <div class="vp-form-row">
-          <router-link :to="`/admin/social-links/${previous.name}`">
+          <router-link :to="`/admin/social-links/${activeSocialLink.name}`">
             <button class="vp-btn" type="button">
               Cancel
             </button>
@@ -47,39 +45,51 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
   import _ from 'lodash';
 
   export default {
     name: 'edit-social-link',
+    data() {
+      return {
+        workingCopy: {
+          name: '...',
+          href: '...',
+        },
+      };
+    },
     computed: {
       ...mapGetters(['activeSocialLink']),
     },
-    data() {
-      return {
-        loaded: false,
-        previous: { name: '...', href: '...' },
-      };
-    },
     methods: {
+      ...mapActions(['fetchSocialLink', 'newSocialLink', 'updateSocialLink']),
+      fetchData() {
+        return this.fetchSocialLink({ name: this.$route.params.name })
+        .then((data) => {
+          this.workingCopy = _.cloneDeep(data);
+        })
+        .catch((err) => {
+          console.error(err);
+          this.$router.push('/admin/social-links/');
+        });
+      },
       submitRequest(e) {
         if (this.$refs.form.checkValidity()) {
           e.preventDefault();
-          this.$store.dispatch('updateSocialLink', {
-            previous: this.previous,
-            socialLink: this.activeSocialLink,
-          }).then(() => {
-            this.$router.push(`/admin/social-links/${this.activeSocialLink.name}`);
+          return this.updateSocialLink({
+            source: this.workingCopy,
+            target: this.activeSocialLink,
+          })
+          .then((data) => {
+            this.$router.push(`/admin/social-links/${this.workingCopy.name}`);
+            return data;
           });
         }
+        return Promise.resolve();
       },
     },
     created() {
-      this.$store.dispatch('fetchSocialLink', { name: this.$route.params.name })
-      .then((data) => {
-        this.previous = _.cloneDeep(data);
-        this.loaded = true;
-      });
+      this.fetchData();
     },
   };
 </script>

@@ -15,7 +15,7 @@ const config = {
     publicPath: '/',
     filename: '[name].js',
   },
-  devtool: process.env.NODE_ENV === 'production' ? undefined : '#eval',
+  devtool: process.env.NODE_ENV === 'production' ? '#source-map' : '#eval',
   module: {
     rules: [
       {

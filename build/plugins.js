@@ -15,11 +15,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV === 'production') {
+  plugins.push(new CompressionWebpackPlugin());
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     comments: false,
-    sourceMap: false,
+    sourceMap: true,
   }));
-  plugins.push(new CompressionWebpackPlugin());
 }
 
 module.exports = plugins;

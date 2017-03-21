@@ -5,7 +5,7 @@ const UPDATE_CURRENT_SOCIAL_LINK = 'UPDATE_CURRENT_SOCIAL_LINK';
 
 export default {
   state: {
-    active: { name: '...', href: '...' },
+    active: new SocialLink({ name: '...', href: '...' }),
     list: [],
   },
   mutations: {
@@ -27,7 +27,12 @@ export default {
   actions: {
     fetchSocialLink({ commit }, { name }) {
       return fetch(`/api/social-links/${name}`)
-        .then(res => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        })
         .then((doc) => {
           commit(UPDATE_CURRENT_SOCIAL_LINK, new SocialLink(doc));
           return doc;
@@ -35,29 +40,37 @@ export default {
     },
     fetchSocialLinksList({ commit }) {
       return fetch('/api/social-links')
-        .then(res => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        })
         .then((docs) => {
           commit(UPDATE_SOCIAL_LINKS_LIST, docs.map(doc => new SocialLink(doc)));
           return docs;
         });
     },
-    newSocialLink({ commit }) {
-      return commit(UPDATE_CURRENT_SOCIAL_LINK, new SocialLink());
-    },
-    updateSocialLink({ commit }, { previous, socialLink }) {
-      return fetch(`/api/social-links/${previous.name}`, {
+    updateSocialLink({ commit }, { source, target }) {
+      return fetch(`/api/social-links/${target.name}`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: socialLink.name,
-          href: socialLink.href,
+          name: source.name,
+          href: source.href,
         }),
-      });
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        });
     },
-    createSocialLink({ commit }, { socialLink }) {
+    createSocialLink({ commit }, { source }) {
       return fetch('/api/social-links', {
         method: 'POST',
         headers: {
@@ -65,15 +78,20 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: socialLink.name,
-          href: socialLink.href,
+          name: source.name,
+          href: source.href,
         }),
-      });
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        });
     },
     deleteSocialLink({ dispatch }, { socialLink }) {
-      return fetch(`/api/social-links/${socialLink.name}`, {
-        method: 'DELETE',
-      }).then(res => res.json())
+      return fetch(`/api/social-links/${socialLink.name}`, { method: 'DELETE' })
+        .then(res => res.json())
         .then(() => {
           dispatch('fetchSocialLinksList');
         });

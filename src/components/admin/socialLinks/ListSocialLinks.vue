@@ -41,10 +41,10 @@
       ...mapGetters(['socialLinksList']),
     },
     created() {
-      this.$store.dispatch('fetchSocialLinksList');
+      this.fetchSocialLinksList();
     },
     methods: {
-      ...mapActions(['deleteSocialLink']),
+      ...mapActions(['fetchSocialLinksList', 'deleteSocialLink']),
     },
   };
 </script>

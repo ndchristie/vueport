@@ -5,6 +5,7 @@ const baseWebpackConfig = require('../../build/webpack.config');
 const projectRoot = path.resolve(__dirname, '../../');
 
 const webpackConfig = merge.smart(baseWebpackConfig, {
+  devtool: '#cheap-source-map',
   module: {
     rules: [
       {
@@ -29,6 +30,7 @@ const webpackConfig = merge.smart(baseWebpackConfig, {
 module.exports = (config) => {
   config.set({
     browsers: ['PhantomJS'],
+    browserNoActivityTimeout: 60000,
     frameworks: ['mocha', 'chai-dom', 'sinon-stub-promise', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],

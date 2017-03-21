@@ -32,16 +32,25 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: 'view-social-link',
     computed: {
       ...mapGetters(['activeSocialLink']),
     },
+    methods: {
+      ...mapActions(['fetchSocialLink']),
+      fetchData() {
+        return this.fetchSocialLink({ name: this.$route.params.name })
+        .catch((err) => {
+          console.error(err);
+          this.$router.push('/admin/social-links/');
+        });
+      },
+    },
     created() {
-      const name = this.$route.params.name;
-      this.$store.dispatch('fetchSocialLink', { name });
+      return this.fetchData();
     },
   };
 </script>

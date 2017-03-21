@@ -9,15 +9,18 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: 'portfolio-footer',
     computed: {
       ...mapGetters(['socialLinksList']),
     },
+    methods: {
+      ...mapActions(['fetchSocialLinksList']),
+    },
     created() {
-      this.$store.dispatch('fetchSocialLinksList');
+      this.fetchSocialLinksList();
     },
   };
 </script>

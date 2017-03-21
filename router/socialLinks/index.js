@@ -22,23 +22,24 @@ router.route('/social-links')
 router.route('/social-links/:name')
   .get((req, res) => {
     SocialLink.findOne({ name: req.params.name }, (err, doc) => {
+      if (!doc) return res.sendStatus(404);
       if (err) return console.log(err);
       return res.json(doc);
     });
   })
   .put((req, res) => {
-    console.log(req.body);
-    // YOU CANT FIND AND UPDATE UNLESS YOU GO TO THE OLD LINK
-    SocialLink.findOneAndUpdate({ name: req.params.name }, req.body, (err, doc) => {
+    const query = { name: req.params.name };
+    const options = { returnNewDocument: true };
+    SocialLink.findOneAndUpdate(query, req.body, options, (err, doc) => {
+      if (!doc) return res.sendStatus(404);
       if (err) return console.log(err);
-      console.log(doc);
       return res.json(doc);
     });
   })
-  .delete((req) => {
+  .delete((req, res) => {
     SocialLink.findOneAndRemove({ name: req.params.name }, req.body, (err) => {
       if (err) return console.log(err);
-      return 200;
+      return res.sendStatus(200);
     });
   });
 

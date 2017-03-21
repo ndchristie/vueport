@@ -4,35 +4,43 @@ import VueRouter from 'vue-router';
 import ViewSocialLink from 'components/admin/socialLinks/ViewSocialLink';
 
 Vue.use(Vuex);
+const sandbox = sinon.sandbox.create();
+let store;
+let router;
+const testSocialLink = { name: 'test', href: 'http://test.com' };
 
 describe('vue components', () => {
   describe('ViewSocialLink', () => {
-    let store;
-    const router = new VueRouter({
-      abstract: true,
-      routes: [{
-        path: '/:name', component: ViewSocialLink,
-      }],
-    });
-
     beforeEach(() => {
       store = new Vuex.Store({
         modules: {
           socialLinks: {
             getters: {
-              activeSocialLink: () => ({ name: 'test', href: 'http://test.com' }),
+              activeSocialLink: () => testSocialLink,
+            },
+            actions: {
+              fetchSocialLink: () => testSocialLink,
             },
           },
         },
       });
+      router = new VueRouter({
+        abstract: true,
+        routes: [
+          { path: '/admin/social-links/' },
+          { path: '/:name', component: ViewSocialLink },
+        ],
+      });
     });
 
     afterEach(() => {
+      sandbox.restore();
       router.push('/');
     });
 
-    it('contains the details for the current social link', (done) => {
-      const stub = sinon.stub(store, 'dispatch', () => Promise.resolve());
+    it('finds a matching object on create', (done) => {
+      const fetchData = sandbox.spy(ViewSocialLink.methods, 'fetchData');
+      const fetchSocialLink = sandbox.spy(ViewSocialLink.methods, 'fetchSocialLink');
       const vm = new Vue({
         el: document.createElement('div'),
         render: h => h('router-view'),
@@ -41,9 +49,33 @@ describe('vue components', () => {
       });
       router.push('test');
       Vue.nextTick(() => {
-        expect(stub).to.have.been.calledWith('fetchSocialLink');
-        stub.restore();
+        const comp = vm.$el;
+        expect(comp.textContent).to.contain('Name');
+        expect(comp.textContent).to.contain(testSocialLink.name);
+        expect(comp.textContent).to.contain('HREF');
+        expect(comp.textContent).to.contain(testSocialLink.href);
+        expect(fetchData).to.have.been.called;
+        expect(fetchSocialLink).to.have.been.called;
         done();
+      });
+    });
+
+    it('returns to index if no match found', (done) => {
+      sandbox.stub(ViewSocialLink.methods, 'fetchSocialLink', () => Promise.reject());
+      sandbox.stub(console, 'error');
+      const vm = new Vue({
+        el: document.createElement('div'),
+        render: h => h('router-view'),
+        store,
+        router,
+      });
+      router.push('willReject');
+      Vue.nextTick(() => {
+        const comp = vm.$children[0];
+        return comp.fetchData().then(() => {
+          expect(vm.$route.path).to.equal('/admin/social-links/');
+          done();
+        });
       });
     });
   });
