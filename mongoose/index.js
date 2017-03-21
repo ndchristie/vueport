@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
 const databaseUrl = process.env.MONGODB_URL || 'mongodb://localhost/test';
 const connect = () => mongoose.connect(databaseUrl).connection;
 const db = connect()
