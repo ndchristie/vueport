@@ -45,8 +45,11 @@ describe('vue components', () => {
       const list = el.querySelector('ul');
       expect(list.children.length)
         .to.equal(expectedLinks.length);
-      expectedLinks.forEach((link) => {
-        expect(list.textContent).to.contain(link.name);
+      const lis = list.querySelectorAll('li');
+      expectedLinks.forEach((link, i) => {
+        expect(lis[i].textContent).to.contain(link.name);
+        expect(lis[i].querySelector('a').href).to.contain(link.href);
+        expect(lis[i].querySelector('a').textContent).to.contain(link.href);
       });
     });
 

@@ -10,7 +10,11 @@
         </div>
         <div class="vp-data-row">
           <label class="vp-data-label">HREF</label>
-          <strong class="vp-data-row-value" :text-content.prop="activeSocialLink.href"></strong>
+          <strong class="vp-data-row-value"><a
+              class = 'vp-link'
+              :href="activeSocialLink.href"
+              :text-content.prop="activeSocialLink.href"
+          ></a></strong>
         </div>
         <div class="action-row">
           <router-link

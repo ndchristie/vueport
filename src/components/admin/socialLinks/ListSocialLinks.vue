@@ -12,6 +12,11 @@
       <ul class="vp-list">
         <li class="vp-list-item vp-tile vp-tile--small" v-for="socialLink in socialLinksList">
           <span :text-content.prop="socialLink.name"></span>
+          <span>(<a
+            class="vp-link"
+            :href="socialLink.href"
+            :text-content.prop="socialLink.href"
+          ></a>)</span>
           <span style="float: right;">
             <router-link
               class="vp-link"
