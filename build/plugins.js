@@ -2,11 +2,16 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
+const mapEnvVariables = (...keys) => keys
+  .reduce((acc, key) => {
+    const value = process.env[key];
+    acc[key] = !isNaN(parseFloat(value)) ? value : `"${value.toString()}"`;
+    return acc;
+  }, {});
+
 const plugins = [
   new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: `"${process.env.NODE_ENV}"`,
-    },
+    'process.env': mapEnvVariables('NODE_ENV', 'API_URI'),
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',

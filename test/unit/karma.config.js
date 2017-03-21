@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('../../build/webpack.config');
