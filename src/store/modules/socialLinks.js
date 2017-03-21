@@ -89,11 +89,13 @@ export default {
           return res.json();
         });
     },
-    deleteSocialLink({ dispatch }, { socialLink }) {
-      return fetch(`/api/social-links/${socialLink.name}`, { method: 'DELETE' })
-        .then(res => res.json())
-        .then(() => {
-          dispatch('fetchSocialLinksList');
+    deleteSocialLink({ dispatch }, { target }) {
+      return fetch(`/api/social-links/${target.name}`, { method: 'DELETE' })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(res.statusText);
+          }
+          return dispatch('fetchSocialLinksList');
         });
     },
   },

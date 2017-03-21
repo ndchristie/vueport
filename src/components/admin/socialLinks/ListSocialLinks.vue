@@ -21,10 +21,11 @@
               class="vp-link"
               :to="`/admin/social-links/${socialLink.name}/edit`"
             >Edit</router-link>
-            <router-link
+            <a
+              href="" onclick="return false;"
               class="vp-link vp-link--alarm"
-              :to="`/admin/social-links/${socialLink.name}/delete`"
-            >Delete</router-link>
+              v-on:click="requestDeletion(socialLink)"
+            >Delete</a>
           </span>
         </li>
       </ul>
@@ -40,11 +41,17 @@
     computed: {
       ...mapGetters(['socialLinksList']),
     },
-    created() {
-      this.fetchSocialLinksList();
-    },
     methods: {
       ...mapActions(['fetchSocialLinksList', 'deleteSocialLink']),
+      requestDeletion(target) {
+        return this.deleteSocialLink({ target })
+          .catch((err) => {
+            console.error(err);
+          });
+      },
+    },
+    created() {
+      this.fetchSocialLinksList();
     },
   };
 </script>

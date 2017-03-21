@@ -19,12 +19,8 @@
           >
             <button class="vp-btn vp-btn--primary">Edit</button>
           </router-link>
-          <router-link
-            class="vp-link vp-link--alarm"
-            :to="`/admin/social-links/${activeSocialLink.name}/delete`"
-          >
-            <button class="vp-btn vp-btn--alarm">Delete</button>
-          </router-link>
+          <button class="vp-btn vp-btn--alarm"
+            v-on:click='requestDeletion()'>Delete</button>
         </div>
       </div>
     </div>
@@ -40,13 +36,22 @@
       ...mapGetters(['activeSocialLink']),
     },
     methods: {
-      ...mapActions(['fetchSocialLink']),
+      ...mapActions(['fetchSocialLink', 'deleteSocialLink']),
       fetchData() {
         return this.fetchSocialLink({ name: this.$route.params.name })
-        .catch((err) => {
-          console.error(err);
-          this.$router.push('/admin/social-links/');
-        });
+          .catch((err) => {
+            console.error(err);
+            this.$router.push('/admin/social-links/');
+          });
+      },
+      requestDeletion() {
+        return this.deleteSocialLink({ target: this.activeSocialLink })
+          .then(() => {
+            this.$router.push('/admin/social-links/');
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       },
     },
     created() {

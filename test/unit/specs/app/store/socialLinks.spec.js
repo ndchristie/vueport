@@ -88,9 +88,16 @@ describe('vuex store', () => {
 
     it('can delete a social link via the api', () => {
       fetchMock.get('/api/social-links', []);
-      fetchMock.delete(`/api/social-links/${socialLink.name}`, {});
-      return store.dispatch('deleteSocialLink', { socialLink })
-        .should.be.fulfilled;
+      fetchMock.delete('*', 503);
+      return store.dispatch('deleteSocialLink', { target: socialLink })
+        .catch(err => expect(err.message).to.equal('Service Unavailable'))
+        .then(() => {
+          fetchMock.restore();
+          fetchMock.get('/api/social-links', []);
+          fetchMock.delete('*', 200);
+          return store.dispatch('deleteSocialLink', { target: socialLink })
+            .should.be.fulfilled;
+        });
     });
   });
 });

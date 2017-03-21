@@ -20,6 +20,7 @@ describe('vue components', () => {
             },
             actions: {
               fetchSocialLink: () => testSocialLink,
+              deleteSocialLink: () => true,
             },
           },
         },
@@ -76,6 +77,30 @@ describe('vue components', () => {
           expect(vm.$route.path).to.equal('/admin/social-links/');
           done();
         });
+      });
+    });
+
+    it('deletes the object via the api', (done) => {
+      sandbox.spy(ViewSocialLink.methods, 'deleteSocialLink');
+      const vm = new Vue({
+        el: document.createElement('div'),
+        render: h => h('router-view'),
+        store,
+        router,
+      });
+      router.push('test');
+      Vue.nextTick(() => {
+        const comp = vm.$children[0];
+        sandbox.stub(console, 'error');
+        return comp.fetchData()
+          .then(() => comp.requestDeletion(new Event()))
+          .then(() => {
+            sandbox.stub(store, 'dispatch', () => Promise.reject());
+            return expect(comp.requestDeletion(new Event())).to.throw;
+          })
+          .then(() => {
+            done();
+          });
       });
     });
   });
