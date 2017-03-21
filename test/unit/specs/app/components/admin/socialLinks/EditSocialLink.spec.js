@@ -63,7 +63,8 @@ describe('vue components', () => {
     });
 
     it('returns to index if no match found', (done) => {
-      sandbox.stub(EditSocialLink.methods, 'fetchSocialLink', () => Promise.reject());
+      sandbox.stub(EditSocialLink.methods, 'fetchSocialLink')
+        .returns(Promise.reject());
       const vm = new Vue({
         el: document.createElement('div'),
         render: h => h('router-view'),

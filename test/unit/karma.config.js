@@ -31,7 +31,7 @@ module.exports = (config) => {
   config.set({
     browsers: ['PhantomJS'],
     browserNoActivityTimeout: 60000,
-    frameworks: ['mocha', 'chai-dom', 'sinon-stub-promise', 'sinon-chai'],
+    frameworks: ['mocha', 'chai-dom', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {

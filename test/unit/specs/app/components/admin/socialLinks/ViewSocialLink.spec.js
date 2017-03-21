@@ -62,7 +62,8 @@ describe('vue components', () => {
     });
 
     it('returns to index if no match found', (done) => {
-      sandbox.stub(ViewSocialLink.methods, 'fetchSocialLink', () => Promise.reject());
+      sandbox.stub(ViewSocialLink.methods, 'fetchSocialLink')
+        .returns(Promise.reject());
       sandbox.stub(console, 'error');
       const vm = new Vue({
         el: document.createElement('div'),
@@ -95,7 +96,8 @@ describe('vue components', () => {
         return comp.fetchData()
           .then(() => comp.requestDeletion(new Event()))
           .then(() => {
-            sandbox.stub(store, 'dispatch', () => Promise.reject());
+            sandbox.stub(store, 'dispatch')
+              .returns(Promise.reject());
             return expect(comp.requestDeletion(new Event())).to.throw;
           })
           .then(() => {

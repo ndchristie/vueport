@@ -34,7 +34,6 @@ describe('vue components', () => {
     });
 
     it('contains a list of social links', () => {
-      const stub = sinon.stub(store, 'dispatch');
       const vm = new Vue({
         el: document.createElement('body'),
         render: createElement => createElement(ListSocialLinks),
@@ -49,11 +48,9 @@ describe('vue components', () => {
       expectedLinks.forEach((link) => {
         expect(list.textContent).to.contain(link.name);
       });
-      stub.restore();
     });
 
     it('deletes an object via the api', () => {
-      // DERP DERP
       sandbox.spy(ListSocialLinks.methods, 'deleteSocialLink');
       const vm = new Vue({
         el: document.createElement('div'),
@@ -66,7 +63,8 @@ describe('vue components', () => {
       return comp.fetchSocialLinksList()
         .then(() => comp.requestDeletion(expectedLinks[0]))
         .then(() => {
-          sandbox.stub(store, 'dispatch', () => Promise.reject());
+          sandbox.stub(store, 'dispatch')
+            .returns(Promise.reject());
           return expect(comp.requestDeletion(expectedLinks[0])).to.throw;
         });
     });
