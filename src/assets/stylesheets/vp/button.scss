@@ -9,11 +9,29 @@
     color: $themeLightest;
     opacity: 0.9;
     padding: $gutterWidth / 2;
-    &:hover { opacity: 1; }
-    &--primary { background-color: $themePrimary; }
-    &--affirm { background-color: $themeAffirm; }
-    &--alert { background-color: $themeAlert; }
-    &--alarm { background-color: $themeAlarm; }
-    &--inverse { background-color: $themeDarkest; }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &--primary {
+      background-color: $themePrimary;
+    }
+
+    &--affirm {
+      background-color: $themeAffirm;
+    }
+
+    &--alert {
+      background-color: $themeAlert;
+    }
+
+    &--alarm {
+      background-color: $themeAlarm;
+    }
+
+    &--inverse {
+      background-color: $themeDarkest;
+    }
   }
 }

@@ -73,6 +73,7 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.9.0",
     "style-loader": "^0.15.0",
+    "stylelint": "^7.9.0",
     "vue-loader": "^11.2.0",
     "vue-router": "^2.3.0",
     "vue-template-compiler": "^2.2.4",

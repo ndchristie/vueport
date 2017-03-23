@@ -3,30 +3,40 @@
 
 .vp {
   &-form {
-
   }
+
   &-fieldset {
     appearance: none;
     border: none;
     padding: 0;
     margin: 0;
   }
+
   &-form-row {
     margin: $gutterWidth 0;
-    &:first-child { margin-top: 0; }
-    &:last-child { margin-bottom: 0; }
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+
   &-form-label {
     display: inline-block;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.5rem;
   }
+
   &-input {
     appearance: none;
     background-color: mix($themeLighter, $themeLightest, 50%);
     border: none;
     border-radius: 2px;
-    box-shadow: inset 0px 4px $themeLighterStain;
+    box-shadow: inset 0 4px $themeLighterStain;
     padding: $gutterWidth / 2;
+
     &--fw {
       display: block;
       width: 100%;
