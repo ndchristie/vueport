@@ -1,3 +1,4 @@
+require('dotenv').config();
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const del = require('del');

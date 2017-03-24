@@ -50,6 +50,6 @@ db.once('open', () => {
       console.log(err);
       return;
     }
-    console.log(`Dev server started at http://localhost:${port}\n`);
+    console.log(`Server started using port ${port}\n`);
   });
 });
