@@ -15,7 +15,10 @@ module.exports = {
     'no-mixed-operators': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-underscore-dangle': ['error', { allowAfterThis: true }],
-    'import/extensions': 0,
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never',
+    }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   settings: {
