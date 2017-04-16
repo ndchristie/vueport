@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import PortfolioFooter from 'components/layout/PortfolioFooter';
-import socialLinks from 'store/modules/socialLinks';
+import PortfolioFooter from '@/components/layout/PortfolioFooter';
+import socialLinks from '@/store/modules/socialLinks';
 import fetchMock from 'fetch-mock';
 
 Vue.use(Vuex);

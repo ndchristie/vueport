@@ -2,16 +2,19 @@ const path = require('path');
 const plugins = require('./plugins');
 const styleLoaders = require('./styleLoaders');
 
-const projectRoot = path.resolve(__dirname, '../');
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
+
 const config = {
   entry: {
     app: [
       'babel-polyfill',
-      path.resolve(projectRoot, './src/main.js'),
+      resolve('./src/main.js'),
     ],
   },
   output: {
-    path: path.resolve(projectRoot, './dist'),
+    path: resolve('./dist'),
     publicPath: '/',
     filename: '[name].js',
   },
@@ -47,12 +50,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.scss', '.vue'],
     alias: {
-      src: path.resolve(projectRoot, './src'),
-      assets: path.resolve(projectRoot, './src/assets'),
-      components: path.resolve(projectRoot, './src/components'),
-      models: path.resolve(projectRoot, './src/models'),
-      store: path.resolve(projectRoot, './src/store'),
-      router: path.resolve(projectRoot, './src/router'),
+      '@': resolve('src'),
     },
   },
 };

@@ -10,4 +10,6 @@
   };
 </script>
 
-<style lang="scss" src="assets/stylesheets/vp.scss"></style>
+<style lang="scss">
+  @import '~bui-css/lib/css/bui.min.css';
+</style>

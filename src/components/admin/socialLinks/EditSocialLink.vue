@@ -1,39 +1,39 @@
 <template>
   <div class="edit-social-link">
     <h1>Social Link: {{ activeSocialLink.name }}</h1>
-    <div class="vp-card">
-      <h2 class="vp-card-heading vp-card-heading--small">Edit Details</h2>
-      <form class="vp-form vp-card-body" ref="form">
-        <div class="vp-form-row">
-          <label class="vp-form-label" for="name">Name
+    <div class="bui-card">
+      <h2 class="bui-card__heading bui-card__heading">Edit Details
+      </h2>
+      <form class="bui-form bui-card__body" ref="form">
+        <div class="bui-form-row">
+          <label class="bui-form-label" for="name">Name
           </label>
           <input
-            class="vp-input vp-input--fw"
+            class="bui-input bui-input--fw"
             type="text"
             id="name"
             v-model="workingCopy.name"
             required
           />
         </div>
-        <div class="vp-form-row">
-          <label class="vp-form-label" for="href">HREF
+        <div class="bui-form-row">
+          <label class="bui-form-label" for="href">HREF
           </label>
           <input
-            class="vp-input vp-input--fw"
+            class="bui-input bui-input--fw"
             type="url"
             id="href"
             v-model="workingCopy.href"
             required
           />
         </div>
-        <div class="vp-form-row">
-          <router-link :to="`/admin/social-links/${activeSocialLink.name}`">
-            <button class="vp-btn" type="button">
-              Cancel
-            </button>
-          </router-link>
+        <div class="bui-form-row">
+          <router-link
+            class="bui-btn bui-btn--primary bui-btn--inverse"
+            :to="`/admin/social-links/${activeSocialLink.name}`"
+          >Cancel</router-link>
           <input
-            class="vp-btn vp-btn--primary"
+            class="bui-btn bui-btn--primary"
             type="submit"
             value="Update"
             v-on:click="submitRequest"

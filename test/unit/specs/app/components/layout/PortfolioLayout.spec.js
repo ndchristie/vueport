@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import PortfolioLayout from 'components/layout/PortfolioLayout';
-import socialLinks from 'store/modules/socialLinks';
+import PortfolioLayout from '@/components/layout/PortfolioLayout';
+import socialLinks from '@/store/modules/socialLinks';
 import _ from 'lodash';
 
 Vue.use(Vuex);

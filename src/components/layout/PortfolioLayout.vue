@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import PortfolioFooter from 'components/layout/PortfolioFooter';
-  import PortfolioHeader from 'components/layout/PortfolioHeader';
+  import PortfolioFooter from '@/components/layout/PortfolioFooter';
+  import PortfolioHeader from '@/components/layout/PortfolioHeader';
 
   export default {
     name: 'portfolio-layout',

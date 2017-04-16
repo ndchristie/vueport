@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import EditSocialLink from 'components/admin/socialLinks/EditSocialLink';
+import EditSocialLink from '@/components/admin/socialLinks/EditSocialLink';
 
 Vue.use(Vuex);
 const sandbox = sinon.sandbox.create();

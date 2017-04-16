@@ -1,10 +1,10 @@
 <template>
   <div class="admin-layout">
     <admin-header></admin-header>
-    <div class="vp-container">
+    <div class="bui-container">
       <router-view></router-view>
       <router-link
-        class="vp-link"
+        class="bui-link"
         :to="'/admin/social-links'"
       >Social Links
       </router-link>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import AdminHeader from 'components/layout/AdminHeader';
+  import AdminHeader from '@/components/layout/AdminHeader';
 
   export default {
     name: 'admin-layout',

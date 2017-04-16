@@ -1,4 +1,4 @@
-import PortfolioHeader from 'components/layout/PortfolioHeader';
+import PortfolioHeader from '@/components/layout/PortfolioHeader';
 import Vue from 'vue';
 import Vuex from 'vuex';
 

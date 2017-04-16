@@ -1,4 +1,4 @@
-import PortfolioLayout from 'components/layout/PortfolioLayout';
+import PortfolioLayout from '@/components/layout/PortfolioLayout';
 
 const portfolioIndexRoute = {
   path: '/',

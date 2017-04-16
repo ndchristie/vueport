@@ -5,7 +5,8 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const mapEnvVariables = (...keys) => keys
   .reduce((acc, key) => {
     const value = process.env[key];
-    acc[key] = !isNaN(parseFloat(value)) ? value : `"${value.toString()}"`;
+    // eslint-disable-next-line eqeqeq
+    acc[key] = !isNaN(parseFloat(value)) || value == undefined ? value : `"${value.toString()}"`;
     return acc;
   }, {});
 

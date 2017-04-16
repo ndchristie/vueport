@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import NotFound from 'components/public/NotFound';
+import NotFound from '@/components/public/NotFound';
 import portfolioRoutes from './portfolioRoutes';
 import adminRoutes from './adminRoutes';
 

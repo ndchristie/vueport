@@ -1,8 +1,8 @@
-import AdminLayout from 'components/layout/AdminLayout';
-import ListSocialLinks from 'components/admin/socialLinks/ListSocialLinks';
-import EditSocialLink from 'components/admin/socialLinks/EditSocialLink';
-import NewSocialLink from 'components/admin/socialLinks/NewSocialLink';
-import ViewSocialLink from 'components/admin/socialLinks/ViewSocialLink';
+import AdminLayout from '@/components/layout/AdminLayout';
+import ListSocialLinks from '@/components/admin/socialLinks/ListSocialLinks';
+import EditSocialLink from '@/components/admin/socialLinks/EditSocialLink';
+import NewSocialLink from '@/components/admin/socialLinks/NewSocialLink';
+import ViewSocialLink from '@/components/admin/socialLinks/ViewSocialLink';
 
 const socialLinksIndex = {
   path: 'social-links',
