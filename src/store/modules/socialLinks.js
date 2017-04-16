@@ -1,16 +1,13 @@
-import SocialLink from 'models/SocialLink';
-
-const UPDATE_SOCIAL_LINKS_LIST = 'UPDATE_SOCIAL_LINKS_LIST';
-const UPDATE_CURRENT_SOCIAL_LINK = 'UPDATE_CURRENT_SOCIAL_LINK';
+import { UPDATE_SOCIAL_LINKS_LIST, UPDATE_CURRENT_SOCIAL_LINK } from '@/store/mutations';
 
 export default {
   state: {
-    active: new SocialLink({ name: '...', href: '...' }),
+    active: { name: '...', href: '...' },
     list: [],
   },
   mutations: {
-    [UPDATE_SOCIAL_LINKS_LIST](state, socialLinks) {
-      state.list = socialLinks;
+    [UPDATE_SOCIAL_LINKS_LIST](state, list) {
+      state.list = list;
     },
     [UPDATE_CURRENT_SOCIAL_LINK](state, socialLink) {
       state.active = socialLink;
@@ -34,8 +31,13 @@ export default {
           return res.json();
         })
         .then((doc) => {
-          commit(UPDATE_CURRENT_SOCIAL_LINK, new SocialLink(doc));
-          return doc;
+          const socialLink = {
+            id: doc.id,
+            name: doc.name,
+            href: doc.href,
+          };
+          commit(UPDATE_CURRENT_SOCIAL_LINK, socialLink);
+          return socialLink;
         });
     },
     fetchSocialLinksList({ commit }) {
@@ -47,8 +49,14 @@ export default {
           return res.json();
         })
         .then((docs) => {
-          commit(UPDATE_SOCIAL_LINKS_LIST, docs.map(doc => new SocialLink(doc)));
-          return docs;
+          const list = docs
+            .map(doc => ({
+              id: doc.id,
+              name: doc.name,
+              href: doc.href,
+            }));
+          commit(UPDATE_SOCIAL_LINKS_LIST, list);
+          return list;
         });
     },
     updateSocialLink({ commit }, { source, target }) {

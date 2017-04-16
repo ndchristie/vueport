@@ -1,7 +1,6 @@
 import Vuex from 'vuex';
-import SocialLink from 'models/SocialLink';
-import socialLinks from 'store/modules/socialLinks';
 import fetchMock from 'fetch-mock';
+import socialLinks from '@/store/modules/socialLinks';
 
 let store;
 let socialLink;
@@ -12,7 +11,7 @@ describe('vuex store', () => {
       store = new Vuex.Store({
         modules: { socialLinks: _.cloneDeep(socialLinks) },
       });
-      socialLink = new SocialLink();
+      socialLink = { name: 'Google', href: 'http://google.com' };
     });
 
     afterEach(() => {
@@ -20,7 +19,10 @@ describe('vuex store', () => {
     });
 
     it('maintains an active social link', () => {
-      expect(store.getters.activeSocialLink).to.be.instanceof(SocialLink);
+      store.getters.activeSocialLink
+        .should.have.property('name');
+      store.getters.activeSocialLink
+        .should.have.property('href');
     });
 
     it('fetches social links from the api', () => {
@@ -31,12 +33,21 @@ describe('vuex store', () => {
         })
         .then(() => {
           fetchMock.restore();
-          const expectedLinks = Array.from(new Array(10), () => new SocialLink());
+          const expectedLinks = Array
+            .from(new Array(10), (v, i) => ({
+              name: `Social Link ${i}`,
+              href: `http://google.com/${i}`,
+            }));
           fetchMock.get('*', expectedLinks);
           return store.dispatch('fetchSocialLinksList')
             .should.be.fulfilled
-            .then(() => {
-              expect(store.getters.socialLinksList).to.deep.equal(expectedLinks);
+            .then((list) => {
+              expectedLinks.forEach((v, i) => {
+                list[i].name
+                  .should.equal(v.name);
+                list[i].href
+                  .should.equal(v.href);
+              });
             });
         });
     });
@@ -73,7 +84,7 @@ describe('vuex store', () => {
     });
 
     it('can edit a social link and post to the api', () => {
-      const updatedSocialLink = new SocialLink({ name: 'newName' });
+      const updatedSocialLink = { name: 'newName' };
       const options = { target: socialLink, source: updatedSocialLink };
       fetchMock.put('*', 503);
       return store.dispatch('updateSocialLink', options)
