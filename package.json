@@ -1,7 +1,7 @@
 {
   "name": "vueport",
   "version": "1.0.0",
-  "description": "A multidisciplinary portfolio template powered by Vuejs",
+  "description": "A multidisciplinary portfolio template powered by Vue.js",
   "main": "index.js",
   "scripts": {
     "build": "gulp clean:dist && gulp webpack",
@@ -34,6 +34,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-dom": "^1.4.3",
+    "codecov": "^2.1.0",
     "compression-webpack-plugin": "^0.3.2",
     "connect": "^3.6.0",
     "cross-env": "^4.0.0",
