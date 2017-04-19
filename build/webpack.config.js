@@ -1,6 +1,7 @@
 const path = require('path');
 const plugins = require('./plugins');
 const styleLoaders = require('./styleLoaders');
+const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -22,6 +23,15 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: eslintFriendlyFormatter,
+        },
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
@@ -31,7 +41,6 @@ const config = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            js: 'babel-loader',
             scss: styleLoaders.vueStyleLoaders,
           },
         },

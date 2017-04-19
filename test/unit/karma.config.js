@@ -1,38 +1,22 @@
 require('dotenv').config();
-const path = require('path');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('../../build/webpack.config');
+const baseConfig = require('../../build/webpack.config');
 
-const projectRoot = path.resolve(__dirname, '../../');
-
-const webpackConfig = merge.smart(baseWebpackConfig, {
-  devtool: '#cheap-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'isparta-loader',
-        include: path.resolve(projectRoot, 'src'),
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            js: 'babel-loader!isparta-loader',
-            scss: 'vue-style-loader!css-loader?sourceMap!sass-loader',
-          },
-        },
-      },
-    ],
-  },
+const webpackConfig = merge(baseConfig, {
+  devtool: '#inline-source-map',
 });
+
+// no need for app entry during tests
+delete webpackConfig.entry;
 
 module.exports = (config) => {
   config.set({
+    // to run in additional browsers:
+    // 1. install corresponding karma launcher
+    //    http://karma-runner.github.io/0.13/config/browsers.html
+    // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
-    browserNoActivityTimeout: 60000,
-    frameworks: ['mocha', 'chai-dom', 'sinon-chai'],
+    frameworks: ['mocha', 'chai-dom', 'sinon-chai', 'phantomjs-shim'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
