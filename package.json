@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp clean:dist && gulp webpack",
-    "build-netlify": "npm run build && gulp netlify",
+    "build-netlify": "cross-env NODE_ENV=production npm run build && gulp netlify",
     "dev": "node build/devServer.js",
     "local": "cross-env NODE_ENV=production npm run build && node build/prodServer.js",
     "test": "cross-env NODE_ENV=test karma start test/unit/karma.config.js --single-run",
