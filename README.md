@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ndchristie/vueport.svg?branch=master)](https://travis-ci.org/ndchristie/vueport)
-[![codecov](https://codecov.io/gh/ndchristie/vueport/branch/master/graph/badge.svg)](https://codecov.io/gh/ndchristie/vueport)
-
+[![Code Climate](https://codeclimate.com/github/ndchristie/vueport/badges/gpa.svg)](https://codeclimate.com/github/ndchristie/vueport)
+[![Test Coverage](https://codeclimate.com/github/ndchristie/vueport/badges/coverage.svg)](https://codeclimate.com/github/ndchristie/vueport/coverage)
 # Vueport
 
 > A multidisciplinary portfolio template powered by Vue.js
@@ -13,7 +13,7 @@ Vueport contains as little hard-coded information as possible, and relies on a M
 
 Vueport uses the Bui CSS library for the majority of its layouts, and is being developed concurrently with that project.
 
-Testing is managed through Karma and is integrated with Travis and Codecov.
+Testing is managed through Karma and is integrated with Travis and Code Climate coverage tools.
 
 ## Build Setup
 

@@ -13,4 +13,4 @@ node_js:
   - "6"
 script:
   - cross-env BABEL_ENV=test karma start test/unit/karma.config.js --single-run
-  - codecov && codeclimate-test-reporter < test/unit/coverage/lcov.info
+  - codeclimate-test-reporter < test/unit/coverage/lcov.info
