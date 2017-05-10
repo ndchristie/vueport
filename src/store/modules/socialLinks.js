@@ -1,4 +1,5 @@
 import { UPDATE_SOCIAL_LINKS_LIST, UPDATE_CURRENT_SOCIAL_LINK } from '@/store/mutations';
+import headers from '@/store/headers';
 
 export default {
   state: {
@@ -62,10 +63,7 @@ export default {
     updateSocialLink({ commit }, { source, target }) {
       return fetch(`/api/social-links/${target.name}`, {
         method: 'PUT',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           name: source.name,
           href: source.href,
@@ -81,10 +79,7 @@ export default {
     createSocialLink({ commit }, { source }) {
       return fetch('/api/social-links', {
         method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           name: source.name,
           href: source.href,
