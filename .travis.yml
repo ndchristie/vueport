@@ -4,6 +4,8 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+  code_climate:
+    repo_token: 230aa842e1ce7febd150df5887fef512335bf85f5fca0c156712bbd057977d43
 env:
   - CXX=g++-4.8
 language: node_js
@@ -11,4 +13,4 @@ node_js:
   - "6"
 script:
   - cross-env BABEL_ENV=test karma start test/unit/karma.config.js --single-run
-  - codecov
+  - codecov && codeclimate-test-reporter < test/unit/coverage/lcov.info
