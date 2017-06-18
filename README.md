@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/ndchristie/vueport.svg?branch=master)](https://travis-ci.org/ndchristie/vueport)
 [![Code Climate](https://codeclimate.com/github/ndchristie/vueport/badges/gpa.svg)](https://codeclimate.com/github/ndchristie/vueport)
 [![Test Coverage](https://codeclimate.com/github/ndchristie/vueport/badges/coverage.svg)](https://codeclimate.com/github/ndchristie/vueport/coverage)
+
 # Vueport
 
 > A multidisciplinary portfolio template powered by Vue.js
